@@ -137,34 +137,38 @@ import Databases.*;
         private void setupGridEventHandlers(GridPane gridPane) {
             for (Node node : gridPane.getChildren()) {
                 if (node instanceof ImageView) {
-                    node.setOnMouseClicked(event -> {
+                    ImageView imageView = (ImageView) node;
+                    imageView.setOnMouseClicked(event -> {
                         if (currentPlantMode != null) {
                             switch (currentPlantMode) {
                                 case "Carrotte":
                                     Carrotte carrotte = new Carrotte(1);
-                                    carrotte.plantCarrot((ImageView) node);
+                                    carrotte.plantCarrot(imageView);
                                     break;
                                 case "Blé":
                                     Blé ble = new Blé(1);
-                                    ble.plantBlé((ImageView) node);
+                                    ble.plantBlé(imageView);
                                     break;
                                 case "Maïs":
                                     Maïs maïs = new Maïs(1);
-                                    maïs.plantMaïs((ImageView) node);
+                                    maïs.plantMaïs(imageView);
                                     break;
                                 case "Bettrave":
                                     Bettrave bettrave = new Bettrave(1);
-                                    bettrave.plantBettrave((ImageView) node);
+                                    bettrave.plantBettrave(imageView);
                                     break;
                                 case "Salade":
                                     Salade salade = new Salade(1);
-                                    salade.plantSalade((ImageView) node);
+                                    salade.plantSalade(imageView);
                                     break;
                                 case "CanneSucre":
                                     CanneSucre canneSucre = new CanneSucre(1);
-                                    canneSucre.plantCanneSucre((ImageView) node);
+                                    canneSucre.plantCanneSucre(imageView);
                                     break;
                             }
+                        } else if (imageView.getImage() != null && imageView.getImage().getUrl().endsWith("end.png")) {
+                            piece.setPiece(piece.getPiece() + 50);
+                            imageView.setImage(null); // Clear the image after collecting
                         }
                     });
                 }
